@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <h1>Expense<span>Track</span></h1>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#expenses"><i class="fas fa-receipt"></i> Expenses</a></li>
+                    <li><a href="#analytics"><i class="fas fa-chart-pie"></i> Analytics</a></li>
+                    <li><a href="#budgets"><i class="fas fa-piggy-bank"></i> Budgets</a></li>
+                    <li><a href="#reports"><i class="fas fa-file-alt"></i> Reports</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40" alt="User">
+                <div>
+                    <p class="name">John Doe</p>
+                    <p class="email">john@example.com</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search expenses...">
+                </div>
+                <div class="header-actions">
+                    <button class="btn add-expense">
+                        <i class="fas fa-plus"></i> Add Expense
+                    </button>
+                    <div class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">0</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section">
+                <div class="stats-container">
+                    <div class="stat-card total-spending">
+                        <h3>Total Spending</h3>
+                        <p class="amount">₹0</p>
+                        <p class="change">No data</p>
+                    </div>
+                    <div class="stat-card remaining-budget">
+                        <div class="budget-header">
+                            <h3>Remaining Budget</h3>
+                            <button class="edit-budget"><i class="fas fa-pencil-alt"></i></button>
+                        </div>
+                        <p class="amount">₹0</p>
+                        <div class="budget-form" style="display: none;">
+                            <input type="number" class="budget-input" step="0.01" placeholder="Enter budget">
+                            <button class="btn save-budget">Save</button>
+                            <button class="btn cancel-budget">Cancel</button>
+                        </div>
+                        <p class="change">No budget set</p>
+                    </div>
+                    <div class="stat-card biggest-expense">
+                        <h3>Biggest Expense</h3>
+                        <p class="amount">₹0</p>
+                        <p class="category">None</p>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-card spending-trend">
+                        <h3>Spending Trend</h3>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                    <div class="chart-card category-distribution">
+                        <h3>Category Distribution</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="recent-expenses">
+                    <h3>Recent Expenses</h3>
+                    <div class="expenses-list">
+                        <p class="no-expenses">No expenses added yet</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expenses Section -->
+            <section id="expenses" class="section">
+                <div class="expenses-header">
+                    <h2>All Expenses</h2>
+                    <div class="expense-filters">
+                        <select id="category-filter">
+                            <option value="">All Categories</option>
+                            <option value="education">Education</option>
+                            <option value="food">Food</option>
+                            <option value="transport">Transport</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="bills">Bills</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <input type="month" id="month-filter">
+                    </div>
+                </div>
+                <div class="all-expenses-list">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="section">
+                <div class="analytics-container">
+                    <div class="advanced-chart">
+                        <h3>Monthly Comparison</h3>
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                    <div class="category-insights">
+                        <h3>Category Insights</h3>
+                        <div class="insights-grid">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budgets Section -->
+            <section id="budgets" class="section">
+                <div class="budgets-container">
+                    <div class="category-budgets">
+                        <h3>Category Budgets</h3>
+                        <div class="budgets-list">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        <button class="btn add-budget">
+                            <i class="fas fa-plus"></i> Add Category Budget
+                        </button>
+                    </div>
+                    <div class="budget-progress">
+                        <h3>Budget Progress</h3>
+                        <div class="progress-bars">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="section">
+                <div class="reports-header">
+                    <h2>Generate Reports</h2>
+                    <div class="report-options">
+                        <select id="report-type">
+                            <option value="monthly">Monthly Summary</option>
+                            <option value="category">Category Breakdown</option>
+                            <option value="yearly">Yearly Overview</option>
+                        </select>
+                        <input type="month" id="report-month">
+                        <button class="btn generate-report">
+                            <i class="fas fa-file-export"></i> Generate Report
+                        </button>
+                    </div>
+                </div>
+                <div class="report-results">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Add Expense Modal -->
+            <div class="modal" id="expenseModal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Add New Expense</h2>
+                    <form id="expenseForm">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select id="category" required>
+                                <option value="">Select a category</option>
+                                <option value="education">Education</option>
+                                <option value="food">Food</option>
+                                <option value="transport">Transport</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="bills">Bills</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" id="description">
+                        </div>
+                        <div class="form-group">
+                            <label for="receipt">Upload Receipt (Optional)</label>
+                            <input type="file" id="receipt" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn save-expense">Save Expense</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Add Budget Modal -->
+            <div class="modal" id="budgetModal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Set Category Budget</h2>
+                    <form id="budgetForm">
+                        <div class="form-group">
+                            <label for="budget-category">Category</label>
+                            <select id="budget-category" required>
+                                <option value="">Select a category</option>
+                                <option value="education">Education</option>
+                                <option value="food">Food</option>
+                                <option value="transport">Transport</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="bills">Bills</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="budget-amount">Monthly Budget</label>
+                            <input type="number" id="budget-amount" step="0.01" required>
+                        </div>
+                        <button type="submit" class="btn save-budget">Save Budget</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
