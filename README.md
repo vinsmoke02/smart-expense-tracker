@@ -52,3 +52,9 @@ expense-tracker/
 
 
 ---
+
+## ⚒️Model
+
+https://mr-prince2.github.io/smart-expense-tracker/
+
+---
